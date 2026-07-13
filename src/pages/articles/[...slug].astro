@@ -1,0 +1,368 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { catColor } from '../../consts';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { title, description, category, author, pubDate, cover, coverAlt } = article.data;
+const { updatedDate, keywords, keyTakeaways, faq } = article.data;
+const { Content, headings } = await render(article);
+
+// כתבות קשורות מאותה קטגוריה
+const related = (await getCollection('articles'))
+  .filter((a) => a.id !== article.id && a.data.category === category)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// זמן קריאה משוער (עברית ~200 מילים/דקה)
+const words = article.body?.split(/\s+/).length ?? 0;
+const readingMinutes = Math.max(1, Math.round(words / 200));
+
+const site = Astro.site?.toString() ?? 'https://xtra.co.il/';
+const url = new URL(`/articles/${article.id}/`, site).toString();
+const imageUrl = cover ? new URL(cover.src, site).toString() : new URL('/og-default.jpg', site).toString();
+
+// ---- JSON-LD: Article + Breadcrumb + FAQPage ----
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: title,
+  description,
+  image: [imageUrl],
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  author: [{ '@type': 'Person', name: author }],
+  publisher: {
+    '@type': 'NewsMediaOrganization',
+    name: 'xtra',
+    logo: { '@type': 'ImageObject', url: new URL('/og-default.jpg', site).toString() },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  articleSection: category,
+  inLanguage: 'he-IL',
+  ...(keywords.length ? { keywords: keywords.join(', ') } : {}),
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'בית', item: site },
+    { '@type': 'ListItem', position: 2, name: category, item: new URL(`/category/${encodeURIComponent(category)}/`, site).toString() },
+    { '@type': 'ListItem', position: 3, name: title, item: url },
+  ],
+};
+const faqSchema = faq.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    }
+  : null;
+const jsonLd = [articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
+---
+
+<BaseLayout title={title} description={description} image={cover?.src} ogType="article" jsonLd={jsonLd}>
+  <article class="post" style={`--cat:${catColor(category)}`}>
+    <div class="container narrow">
+      <a href={`/category/${encodeURIComponent(category)}/`} class="pill">{category}</a>
+      <h1>{title}</h1>
+      <p class="dek">{description}</p>
+      <div class="meta-row byline">
+        <span>מאת {author}</span>
+        <span class="dot"></span>
+        <FormattedDate date={pubDate} />
+        <span class="dot"></span>
+        <span>{readingMinutes} דקות קריאה</span>
+      </div>
+    </div>
+
+    {
+      keyTakeaways.length > 0 && (
+        <div class="container narrow">
+          <aside class="tldr" aria-label="עיקרי הדברים">
+            <h2>בקצרה</h2>
+            <ul>
+              {keyTakeaways.map((k) => <li>{k}</li>)}
+            </ul>
+          </aside>
+        </div>
+      )
+    }
+
+    {
+      cover && (
+        <div class="container narrow">
+          <figure class="hero-figure">
+            <Image src={cover} alt={coverAlt} widths={[600, 800, 1200]} sizes="(max-width: 800px) 100vw, 760px" />
+            {coverAlt && <figcaption class="muted">{coverAlt}</figcaption>}
+          </figure>
+        </div>
+      )
+    }
+
+    <div class="container narrow">
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+
+    {
+      faq.length > 0 && (
+        <div class="container narrow">
+          <section class="faq" aria-label="שאלות נפוצות">
+            <h2>שאלות נפוצות</h2>
+            {faq.map((f) => (
+              <details class="faq-item">
+                <summary>{f.question}</summary>
+                <p>{f.answer}</p>
+              </details>
+            ))}
+          </section>
+        </div>
+      )
+    }
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="container section related">
+        <div class="section-head">
+          <h2>עוד ב{category}</h2>
+        </div>
+        <div class="rel-grid">
+          {related.map((a) => (
+            <ArticleCard article={a} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .narrow {
+    max-width: 760px;
+  }
+  .post .pill {
+    background: var(--cat);
+  }
+
+  /* TL;DR / key takeaways (GEO-friendly) */
+  .tldr {
+    background: var(--surface);
+    border-inline-start: 4px solid var(--cat);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    margin: 26px 0 4px;
+  }
+  .tldr h2 {
+    font-size: 1.1rem;
+    margin: 0 0 10px;
+    color: var(--cat);
+  }
+  .tldr ul {
+    margin: 0;
+    padding-inline-start: 1.2em;
+    font-family: var(--font);
+  }
+  .tldr li {
+    margin-bottom: 7px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* FAQ */
+  .faq {
+    margin-top: 40px;
+    padding-top: 26px;
+    border-top: 2px solid var(--line);
+  }
+  .faq > h2 {
+    font-size: 1.7rem;
+    margin-bottom: 14px;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+    padding: 6px 0;
+  }
+  .faq-item summary {
+    cursor: pointer;
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 1.08rem;
+    padding: 12px 0;
+    color: var(--ink);
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary::before {
+    content: '+';
+    color: var(--cat);
+    font-weight: 800;
+    margin-inline-end: 10px;
+  }
+  .faq-item[open] summary::before {
+    content: '–';
+  }
+  .faq-item p {
+    font-family: var(--font);
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0 0 14px;
+    padding-inline-start: 22px;
+  }
+  .post {
+    padding-top: 40px;
+  }
+  .post h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin: 14px 0 12px;
+  }
+  .dek {
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin: 0 0 16px;
+  }
+  .byline {
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-figure {
+    margin: 0 0 34px;
+  }
+  .hero-figure :global(img) {
+    width: 100%;
+    height: auto; /* neutralize the height attribute so aspect-ratio governs */
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: block;
+  }
+  .hero-figure figcaption {
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* Article body typography */
+  .prose {
+    font-size: 1.13rem;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .prose :global(h2) {
+    font-size: 1.6rem;
+    margin: 1.6em 0 0.5em;
+  }
+  .prose :global(h3) {
+    font-size: 1.3rem;
+    margin: 1.4em 0 0.4em;
+  }
+  .prose :global(p) {
+    margin: 0 0 1.1em;
+  }
+  .prose :global(a) {
+    color: var(--cat);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 1.2em;
+    padding-inline-start: 1.4em;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.5em;
+  }
+  .prose :global(img) {
+    display: block;
+    width: 100%;
+    height: auto; /* neutralize the height attribute so aspect-ratio governs */
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    margin: 1.8em 0 0.6em;
+  }
+
+  /* ===== real bordered tables ===== */
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.8em 0;
+    font-family: var(--font);
+    font-size: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .prose :global(thead) {
+    background: var(--navy);
+  }
+  .prose :global(th) {
+    color: #fff;
+    font-weight: 700;
+    text-align: right;
+    padding: 13px 16px;
+    border: 1px solid var(--navy-soft);
+  }
+  .prose :global(td) {
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    text-align: right;
+    vertical-align: top;
+  }
+  .prose :global(tbody tr:nth-child(even)) {
+    background: var(--surface);
+  }
+  .prose :global(tbody tr:hover) {
+    background: #eef2f7;
+  }
+  .prose :global(blockquote) {
+    margin: 1.6em 0;
+    padding: 4px 20px;
+    border-inline-start: 4px solid var(--cat);
+    background: var(--surface);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+  }
+  .prose :global(strong) {
+    font-weight: 800;
+  }
+
+  .related {
+    border-top: 1px solid var(--line);
+    margin-top: 20px;
+  }
+  .rel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 820px) {
+    .rel-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

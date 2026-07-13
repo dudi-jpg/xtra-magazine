@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.jpg';
+interface Props {
+  light?: boolean; // light=true → white chip behind logo (for dark backgrounds like the footer)
+  size?: number; // logo height in px
+}
+const { light = false, size = 96 } = Astro.props;
+---
+
+<span class:list={['logo', light && 'logo--chip']} style={`--logo-h:${size}px`}>
+  <Image src={logo} alt="xtra ישראל" widths={[400, 760, 1200]} sizes="(max-width: 820px) 300px, 420px" />
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+  }
+  .logo :global(img) {
+    height: var(--logo-h);
+    width: auto;
+    display: block;
+  }
+  .logo--chip {
+    background: #fff;
+    padding: 10px 16px;
+    border-radius: 10px;
+  }
+</style>

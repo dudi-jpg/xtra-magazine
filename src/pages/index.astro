@@ -1,0 +1,418 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { CATEGORIES, catColor } from '../consts';
+
+const all = (await getCollection('articles')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const lead = all[0];
+const headlineList = all.slice(1, 5); // 4 כותרות ברשימת ההירו
+const picks = all.slice(0, 6); // רשימת "נבחרות" לסיידבר
+
+// בלוק לכל קטגוריה — 4 הכתבות האחרונות בקטגוריה
+const blocks = CATEGORIES.map((category) => ({
+  category,
+  items: all.filter((a) => a.data.category === category).slice(0, 4),
+})).filter((b) => b.items.length > 0);
+
+const catHref = (c: string) => `/category/${encodeURIComponent(c)}/`;
+---
+
+<BaseLayout>
+  <!-- ===== HERO: lead + headline list ===== -->
+  {
+    lead && (
+      <section class="container hero">
+        <article class="lead" style={`--cat:${catColor(lead.data.category)}`}>
+          <a href={`/articles/${lead.id}/`} class="lead-media">
+            {lead.data.cover && (
+              <Image src={lead.data.cover} alt={lead.data.coverAlt} widths={[700, 1100, 1500]} sizes="(max-width: 900px) 100vw, 780px" />
+            )}
+          </a>
+          <a href={catHref(lead.data.category)} class="lead-cat">{lead.data.category}</a>
+          <h1><a href={`/articles/${lead.id}/`}>{lead.data.title}</a></h1>
+          <p class="lead-dek">{lead.data.description}</p>
+          <div class="lead-meta">
+            <span>מאת {lead.data.author}</span>
+            <span class="sep" />
+            <FormattedDate date={lead.data.pubDate} />
+          </div>
+        </article>
+
+        <aside class="hlist">
+          {headlineList.map((a) => (
+            <a href={`/articles/${a.id}/`} class="hitem" style={`--cat:${catColor(a.data.category)}`}>
+              <span class="hitem-cat">{a.data.category}</span>
+              <h3>{a.data.title}</h3>
+              <div class="hitem-meta"><FormattedDate date={a.data.pubDate} /></div>
+            </a>
+          ))}
+        </aside>
+      </section>
+    )
+  }
+
+  <!-- ===== Main + Sidebar ===== -->
+  <div class="container layout">
+    <main class="feed">
+      {
+        blocks.map((block) => (
+          <section class="catblock" style={`--cat:${catColor(block.category)}`}>
+            <div class="blockhead">
+              <h2>{block.category}</h2>
+              <a class="blockmore" href={catHref(block.category)}>לכל הכתבות ←</a>
+            </div>
+            <div class="cards2">
+              {block.items.map((a) => (
+                <ArticleCard article={a} />
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </main>
+
+    <aside class="sidebar">
+      <div class="side-card">
+        <h3 class="side-h">חם עכשיו</h3>
+        <ol class="picks">
+          {picks.map((a) => (
+            <li style={`--cat:${catColor(a.data.category)}`}>
+              <a href={`/articles/${a.id}/`}>
+                <span class="picks-cat">{a.data.category}</span>
+                <span class="picks-title">{a.data.title}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="side-card">
+        <h3 class="side-h">מדורים</h3>
+        <div class="sections">
+          {CATEGORIES.map((c) => (
+            <a href={catHref(c)} class="sec-chip" style={`--cat:${catColor(c)}`}>{c}</a>
+          ))}
+        </div>
+      </div>
+
+      <div class="side-card newsletter">
+        <h3>הניוזלטר של xtra</h3>
+        <p>מה שווה לראות, לשמוע ולקרוא השבוע — ביקורות, המלצות והופעות, ישירות למייל.</p>
+        <form action="mailto:info@xtra.co.il" method="post" class="nl-form">
+          <input type="email" placeholder="כתובת אימייל" aria-label="אימייל" required />
+          <button type="submit">הרשמה</button>
+        </form>
+      </div>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ===== HERO ===== */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.62fr 1fr;
+    gap: 40px;
+    padding-top: 34px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .lead-media {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    margin-bottom: 18px;
+  }
+  .lead-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .lead:hover .lead-media :global(img) {
+    transform: scale(1.03);
+  }
+  .lead-cat,
+  .hitem-cat {
+    display: inline-block;
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--cat);
+    margin-bottom: 10px;
+  }
+  .lead h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+    line-height: 1.14;
+    font-weight: 800;
+    margin: 0 0 14px;
+  }
+  .lead h1 a {
+    color: var(--ink);
+    transition: color 0.15s ease;
+  }
+  .lead h1 a:hover {
+    color: var(--cat);
+  }
+  .lead-dek {
+    font-family: var(--font);
+    font-size: 1.12rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    max-width: 60ch;
+  }
+  .lead-meta,
+  .hitem-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .lead-meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--cat);
+  }
+
+  /* Headline list */
+  .hlist {
+    display: flex;
+    flex-direction: column;
+  }
+  .hitem {
+    display: block;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .hitem:first-child {
+    padding-top: 0;
+  }
+  .hitem:last-child {
+    border-bottom: 0;
+  }
+  .hitem-cat {
+    margin-bottom: 6px;
+    font-size: 0.72rem;
+  }
+  .hitem h3 {
+    font-size: 1.22rem;
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--ink);
+    transition: color 0.15s ease;
+  }
+  .hitem:hover h3 {
+    color: var(--cat);
+  }
+  .hitem-meta {
+    font-size: 0.8rem;
+  }
+
+  /* ===== Layout: main feed + sidebar ===== */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 44px;
+    padding-top: 40px;
+  }
+  .feed {
+    min-width: 0;
+  }
+  .catblock {
+    margin-bottom: 42px;
+  }
+  .blockhead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--line);
+  }
+  .blockhead h2 {
+    position: relative;
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    font-weight: 800;
+    margin: 0;
+    padding-bottom: 12px;
+  }
+  .blockhead h2::after {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 3px;
+    background: var(--cat);
+  }
+  .blockmore {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--cat);
+    white-space: nowrap;
+  }
+  .cards2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 26px;
+  }
+
+  /* ===== Sidebar ===== */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    min-width: 0;
+  }
+  .side-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 16px 18px;
+    background: var(--paper);
+  }
+  .side-h {
+    font-size: 1.08rem;
+    font-weight: 800;
+    margin: 0 0 14px;
+    padding-bottom: 9px;
+    border-bottom: 3px solid var(--accent);
+    display: inline-block;
+  }
+  .picks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: pick;
+  }
+  .picks li {
+    display: flex;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+    counter-increment: pick;
+  }
+  .picks li:first-child {
+    padding-top: 0;
+  }
+  .picks li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  .picks li::before {
+    content: counter(pick);
+    flex: none;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: var(--cat);
+    line-height: 1;
+    width: 22px;
+  }
+  .picks-cat {
+    display: block;
+    color: var(--cat);
+    font-weight: 800;
+    font-size: 0.7rem;
+    margin-bottom: 4px;
+  }
+  .picks-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    line-height: 1.35;
+    color: var(--ink);
+    transition: color 0.15s ease;
+  }
+  .picks a:hover .picks-title {
+    color: var(--cat);
+  }
+
+  /* ===== Sections chips ===== */
+  .sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+  .sec-chip {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 7px 14px;
+    border-radius: 999px;
+    color: #fff;
+    background: var(--cat);
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+  .sec-chip:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+  }
+  .newsletter {
+    background: var(--surface);
+  }
+  .newsletter h3 {
+    font-size: 1.08rem;
+    margin: 0 0 6px;
+  }
+  .newsletter p {
+    font-family: var(--font);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin: 0 0 13px;
+  }
+  .nl-form {
+    display: flex;
+    gap: 8px;
+  }
+  .nl-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-family: var(--font);
+    font-size: 0.92rem;
+  }
+  .nl-form button {
+    background: var(--accent);
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 0 16px;
+    font-weight: 800;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 980px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+  }
+  @media (max-width: 560px) {
+    .cards2 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

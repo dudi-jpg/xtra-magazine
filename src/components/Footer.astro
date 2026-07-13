@@ -1,0 +1,88 @@
+---
+import { SITE_TAGLINE, CATEGORIES } from '../consts';
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+const catHref = (c: string) => `/category/${encodeURIComponent(c)}/`;
+---
+
+<footer class="site-footer">
+  <div class="container grid">
+    <div class="fbrand">
+      <Logo light={true} size={46} />
+      <p class="muted ftag">{SITE_TAGLINE}</p>
+    </div>
+    <div>
+      <h4>מדורים</h4>
+      <ul>
+        {CATEGORIES.map((c) => <li><a href={catHref(c)}>{c}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h4>מידע</h4>
+      <ul>
+        <li><a href="/">ראשי</a></li>
+        <li><a href="/archive/">כל הכתבות</a></li>
+        <li><a href="/about/">אודות</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container bottom">
+    <span>© {year} xtra — כל הזכויות שמורות</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy);
+    color: #c3c8cf;
+    margin-top: 54px;
+    padding-top: 50px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 36px;
+  }
+  .ftag {
+    margin-top: 16px;
+    max-width: 42ch;
+    color: #8b929b;
+    font-family: var(--font);
+  }
+  h4 {
+    font-family: var(--font);
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+    font-family: var(--font);
+  }
+  ul a {
+    color: #c3c8cf;
+    transition: color 0.15s ease;
+  }
+  ul a:hover {
+    color: var(--accent);
+  }
+  .bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-block: 20px;
+    font-family: var(--font);
+    font-size: 0.85rem;
+    color: #8b929b;
+  }
+  @media (max-width: 700px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  }
+</style>
