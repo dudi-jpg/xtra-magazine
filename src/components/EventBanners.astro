@@ -29,29 +29,31 @@ const columns = [
       (col) =>
         col.items.length > 0 && (
           <aside class={`evb evb--${col.side}`} aria-label="אירועים קרובים">
-            <div class="evb-head">
-              <span class="evb-title">אירועים קרובים</span>
-              <span class="evb-bar" />
-            </div>
-            <div class="evb-list">
-              {col.items.map((e) => (
-                <a
-                  class="evb-card"
-                  href={e.url || '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={`--cat:${catColor(e.category)}`}
-                >
-                  <span class="evb-date">{fmt(e.date)}</span>
-                  <span class="evb-cat">{e.category}</span>
-                  <span class="evb-name">{e.title}</span>
-                  {(e.venue || e.city) && (
-                    <span class="evb-venue">
-                      {[e.venue, e.city].filter(Boolean).join(', ')}
-                    </span>
-                  )}
-                </a>
-              ))}
+            <div class="evb-inner">
+              <div class="evb-head">
+                <span class="evb-kicker">xtra</span>
+                <span class="evb-title">אירועים קרובים</span>
+              </div>
+              <div class="evb-list">
+                {col.items.map((e) => (
+                  <a
+                    class="evb-card"
+                    href={e.url || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={`--cat:${catColor(e.category)}`}
+                  >
+                    <span class="evb-date">{fmt(e.date)}</span>
+                    <span class="evb-cat">{e.category}</span>
+                    <span class="evb-name">{e.title}</span>
+                    {(e.venue || e.city) && (
+                      <span class="evb-venue">
+                        {[e.venue, e.city].filter(Boolean).join(', ')}
+                      </span>
+                    )}
+                  </a>
+                ))}
+              </div>
             </div>
           </aside>
         )
@@ -61,50 +63,71 @@ const columns = [
 <style>
   .evb {
     position: fixed;
-    top: 96px;
-    width: 168px;
-    max-height: calc(100vh - 130px);
-    overflow: auto;
+    top: 250px; /* fallback; JS keeps it just below the header/nav */
+    width: 182px;
+    max-height: calc(100vh - 280px);
     z-index: 40;
     display: none; /* shown only when there's room beside the 1280px content */
-    scrollbar-width: thin;
+    /* colorful gradient frame that wraps the events */
+    padding: 3px;
+    background: var(--grad);
+    border-radius: 18px;
+    box-shadow: var(--shadow-lg);
   }
   .evb--right {
-    right: 18px;
+    right: 20px;
   }
   .evb--left {
-    left: 18px;
+    left: 20px;
   }
 
+  .evb-inner {
+    background: var(--paper);
+    border-radius: 15px;
+    overflow: hidden;
+    max-height: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* colorful header ribbon */
   .evb-head {
-    margin-bottom: 12px;
+    background: var(--grad);
+    padding: 13px 14px 12px;
+    text-align: center;
+    color: #fff;
+  }
+  .evb-kicker {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    opacity: 0.92;
+    text-transform: uppercase;
   }
   .evb-title {
     display: block;
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: 0.95rem;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .evb-bar {
-    display: block;
-    height: 4px;
-    width: 100%;
-    margin-top: 6px;
-    border-radius: 2px;
-    background: var(--grad);
+    font-size: 1.02rem;
+    line-height: 1.1;
+    margin-top: 2px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   }
 
   .evb-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    padding: 12px;
+    overflow-y: auto;
+    scrollbar-width: thin;
   }
   .evb-card {
     position: relative;
     display: block;
-    padding: 12px 12px 12px 12px;
+    padding: 11px 12px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--paper);
@@ -164,3 +187,24 @@ const columns = [
     }
   }
 </style>
+
+<script>
+  // Keep the floating banners just below the header/sticky-nav so they never
+  // overlap it — follows the nav as it becomes sticky on scroll.
+  const banners = Array.from(document.querySelectorAll<HTMLElement>('.evb'));
+  const nav = document.querySelector<HTMLElement>('.mainnav');
+  if (banners.length && nav) {
+    const gap = 18;
+    const place = () => {
+      const top = Math.max(nav.getBoundingClientRect().bottom + gap, gap);
+      const maxH = window.innerHeight - top - 20;
+      for (const b of banners) {
+        b.style.top = `${top}px`;
+        b.style.maxHeight = `${maxH}px`;
+      }
+    };
+    place();
+    window.addEventListener('scroll', place, { passive: true });
+    window.addEventListener('resize', place);
+  }
+</script>
