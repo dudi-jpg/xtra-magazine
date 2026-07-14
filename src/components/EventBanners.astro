@@ -32,7 +32,7 @@ const columns = [
             <div class="evb-inner">
               <div class="evb-head">
                 <span class="evb-kicker">xtra</span>
-                <span class="evb-title">אירועים קרובים</span>
+                <span class="evb-title"><span class="evb-live"><span class="evb-dot" />LIVE</span>אירועים קרובים</span>
               </div>
               <div class="evb-list">
                 {col.items.map((e) => (
@@ -68,11 +68,32 @@ const columns = [
     max-height: calc(100vh - 280px);
     z-index: 40;
     display: none; /* shown only when there's room beside the 1280px content */
-    /* colorful gradient frame that wraps the events */
+    /* colorful flowing gradient frame that wraps the events */
     padding: 3px;
-    background: var(--grad);
+    background-image: linear-gradient(
+      110deg,
+      #e6197f,
+      #f5921e,
+      #8a2be2,
+      #12b5c9,
+      #6d28d9,
+      #e6197f
+    );
+    background-size: 260% 260%;
+    animation: evb-flow 9s ease-in-out infinite;
     border-radius: 18px;
     box-shadow: var(--shadow-lg);
+  }
+  @keyframes evb-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
   .evb--right {
     right: 20px;
@@ -90,12 +111,57 @@ const columns = [
     flex-direction: column;
   }
 
-  /* colorful header ribbon */
+  /* colorful flowing header ribbon */
   .evb-head {
-    background: var(--grad);
+    background-image: linear-gradient(
+      110deg,
+      #e6197f,
+      #f5921e,
+      #8a2be2,
+      #12b5c9,
+      #6d28d9,
+      #e6197f
+    );
+    background-size: 260% 260%;
+    animation: evb-flow 9s ease-in-out infinite;
     padding: 13px 14px 12px;
     text-align: center;
     color: #fff;
+  }
+  /* live pulse indicator */
+  .evb-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    vertical-align: middle;
+    margin-inline-end: 8px;
+    padding: 2px 8px 2px 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+  .evb-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    animation: evb-pulse 1.3s ease-in-out infinite;
+  }
+  @keyframes evb-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(0.65);
+      box-shadow: 0 0 0 5px rgba(255, 255, 255, 0);
+    }
   }
   .evb-kicker {
     display: block;
@@ -132,11 +198,24 @@ const columns = [
     border-radius: var(--radius);
     background: var(--paper);
     border-inline-start: 4px solid var(--cat);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   }
   .evb-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow);
+  }
+  /* the card currently "live" in the auto-cycle */
+  .evb-card.is-live {
+    transform: translateY(-3px) scale(1.025);
+    box-shadow: 0 10px 26px color-mix(in srgb, var(--cat) 32%, transparent);
+    border-color: var(--cat);
+  }
+  .evb-card.is-live .evb-date {
+    animation: evb-chip 1.3s ease-in-out infinite;
+  }
+  @keyframes evb-chip {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
   }
   .evb-date {
     display: inline-block;
@@ -186,6 +265,19 @@ const columns = [
       display: block;
     }
   }
+
+  /* respect users who prefer no motion */
+  @media (prefers-reduced-motion: reduce) {
+    .evb,
+    .evb-head,
+    .evb-dot,
+    .evb-card.is-live .evb-date {
+      animation: none !important;
+    }
+    .evb-card.is-live {
+      transform: none;
+    }
+  }
 </style>
 
 <script>
@@ -206,5 +298,26 @@ const columns = [
     place();
     window.addEventListener('scroll', place, { passive: true });
     window.addEventListener('resize', place);
+  }
+
+  // Auto-cycle a "live" highlight through each banner's event cards (pauses on hover).
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    for (const b of banners) {
+      const cards = Array.from(b.querySelectorAll<HTMLElement>('.evb-card'));
+      if (cards.length < 2) continue;
+      let k = 0;
+      let paused = false;
+      b.addEventListener('mouseenter', () => (paused = true));
+      b.addEventListener('mouseleave', () => (paused = false));
+      const tick = () => {
+        if (!paused) {
+          cards.forEach((c, i) => c.classList.toggle('is-live', i === k));
+          k = (k + 1) % cards.length;
+        }
+      };
+      tick();
+      setInterval(tick, 2000);
+    }
   }
 </script>
