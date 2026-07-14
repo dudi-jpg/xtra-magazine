@@ -1,0 +1,166 @@
+---
+import data from '../data/events.json';
+import { catColor } from '../consts';
+
+// Build-time guard: only show events whose date hasn't passed, soonest first.
+const today = new Date().toISOString().slice(0, 10);
+const events = (data.events || [])
+  .filter((e) => e && e.date && e.date >= today)
+  .sort((a, b) => a.date.localeCompare(b.date));
+
+// Split across the two side banners (right gets even indexes, left odd).
+const right = events.filter((_, i) => i % 2 === 0).slice(0, 4);
+const left = events.filter((_, i) => i % 2 === 1).slice(0, 4);
+
+const fmt = (d) => {
+  const [, m, day] = d.split('-');
+  return `${parseInt(day, 10)}.${parseInt(m, 10)}`;
+};
+
+const columns = [
+  { side: 'right', items: right },
+  { side: 'left', items: left },
+];
+---
+
+{
+  events.length > 0 &&
+    columns.map(
+      (col) =>
+        col.items.length > 0 && (
+          <aside class={`evb evb--${col.side}`} aria-label="אירועים קרובים">
+            <div class="evb-head">
+              <span class="evb-title">אירועים קרובים</span>
+              <span class="evb-bar" />
+            </div>
+            <div class="evb-list">
+              {col.items.map((e) => (
+                <a
+                  class="evb-card"
+                  href={e.url || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={`--cat:${catColor(e.category)}`}
+                >
+                  <span class="evb-date">{fmt(e.date)}</span>
+                  <span class="evb-cat">{e.category}</span>
+                  <span class="evb-name">{e.title}</span>
+                  {(e.venue || e.city) && (
+                    <span class="evb-venue">
+                      {[e.venue, e.city].filter(Boolean).join(', ')}
+                    </span>
+                  )}
+                </a>
+              ))}
+            </div>
+          </aside>
+        )
+    )
+}
+
+<style>
+  .evb {
+    position: fixed;
+    top: 96px;
+    width: 168px;
+    max-height: calc(100vh - 130px);
+    overflow: auto;
+    z-index: 40;
+    display: none; /* shown only when there's room beside the 1280px content */
+    scrollbar-width: thin;
+  }
+  .evb--right {
+    right: 18px;
+  }
+  .evb--left {
+    left: 18px;
+  }
+
+  .evb-head {
+    margin-bottom: 12px;
+  }
+  .evb-title {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.95rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .evb-bar {
+    display: block;
+    height: 4px;
+    width: 100%;
+    margin-top: 6px;
+    border-radius: 2px;
+    background: var(--grad);
+  }
+
+  .evb-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .evb-card {
+    position: relative;
+    display: block;
+    padding: 12px 12px 12px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    border-inline-start: 4px solid var(--cat);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .evb-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+  .evb-date {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.8rem;
+    color: #fff;
+    background: var(--cat);
+    padding: 2px 9px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .evb-cat {
+    display: block;
+    font-weight: 800;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: var(--cat);
+    margin-bottom: 3px;
+  }
+  .evb-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    line-height: 1.28;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+  .evb-venue {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-family: var(--font);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  /* Only render the rails when the viewport is wide enough to not overlap content */
+  @media (min-width: 1600px) {
+    .evb {
+      display: block;
+    }
+  }
+</style>

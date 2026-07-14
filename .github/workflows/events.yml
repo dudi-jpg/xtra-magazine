@@ -1,0 +1,48 @@
+name: Update events
+
+on:
+  schedule:
+    # 06:00 UTC every 3 days (days 1,4,7,…,28,31 ≈ every 3 days)
+    - cron: '0 6 */3 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-events
+  cancel-in-progress: false
+
+jobs:
+  events:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh upcoming events
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-events.mjs
+
+      - name: Commit & push updated events
+        run: |
+          git config user.name "xtra Bot"
+          git config user.email "info@xtra.co.il"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Refresh upcoming events — $(date -u +%Y-%m-%d)"
+            git push
+            echo "Pushed updated events."
+          else
+            echo "No event changes to commit."
+          fi

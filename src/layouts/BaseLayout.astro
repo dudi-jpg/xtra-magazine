@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import EventBanners from '../components/EventBanners.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 interface Props {
@@ -70,6 +71,7 @@ const allSchemas = [orgSchema, siteSchema, ...jsonLd];
   </head>
   <body>
     <Header />
+    <EventBanners />
     <main>
       <slot />
     </main>
