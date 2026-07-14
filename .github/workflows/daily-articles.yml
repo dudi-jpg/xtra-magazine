@@ -2,14 +2,16 @@ name: Daily articles
 
 on:
   schedule:
-    # 05:00 UTC daily ≈ 08:00 Israel (DST) / 07:00 (winter)
-    - cron: '0 5 * * *'
+    # Two triggers so we always hit 08:00 *Israel* time year-round; a guard step
+    # below runs the job only when the local Asia/Jerusalem hour is 08.
+    - cron: '0 5 * * *' # 08:00 Israel during IDT (summer, UTC+3)
+    - cron: '0 6 * * *' # 08:00 Israel during IST (winter, UTC+2)
   workflow_dispatch:
     inputs:
       count:
         description: 'How many articles to generate'
         required: false
-        default: '6'
+        default: '10'
 
 permissions:
   contents: write
@@ -22,26 +24,43 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
+      - name: Gate to 08:00 Israel time
+        id: gate
+        run: |
+          HOUR=$(TZ=Asia/Jerusalem date +%H)
+          echo "Israel local hour: $HOUR"
+          if [ "$HOUR" = "08" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "run=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=no (only the 08:00 Israel trigger proceeds)"
+            echo "run=no" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
+        if: steps.gate.outputs.run == 'yes'
         uses: actions/checkout@v4
 
       - name: Setup Node
+        if: steps.gate.outputs.run == 'yes'
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
       - name: Install dependencies
+        if: steps.gate.outputs.run == 'yes'
         run: npm ci
 
       - name: Generate articles
+        if: steps.gate.outputs.run == 'yes'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          ARTICLES_PER_RUN: ${{ github.event.inputs.count || '6' }}
+          ARTICLES_PER_RUN: ${{ github.event.inputs.count || '10' }}
           # ARTICLE_MODEL: claude-opus-4-8   # override here if desired
         run: npm run generate:daily
 
       - name: Commit & push new articles
+        if: steps.gate.outputs.run == 'yes'
         run: |
           git config user.name "xtra Bot"
           git config user.email "info@xtra.co.il"
