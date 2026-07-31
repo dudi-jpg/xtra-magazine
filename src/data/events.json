@@ -1,30 +1,6 @@
 {
-  "updated": "2026-07-28",
+  "updated": "2026-07-31",
   "events": [
-    {
-      "title": "פסטיבל ישראל ה-65 – אירוע הפתיחה \"על חבל דק\"",
-      "date": "2026-07-28",
-      "category": "תיאטרון",
-      "venue": "תיאטרון ירושלים",
-      "city": "ירושלים",
-      "url": "https://israel-festival.org/2026/performances-board"
-    },
-    {
-      "title": "מסיבה ישראלית – שלומי שבת, ליאור נרקיס, רוני דלומי, יזהר כהן ואבי טולדנו",
-      "date": "2026-07-30",
-      "category": "חיי לילה",
-      "venue": "חוצות היוצר",
-      "city": "ירושלים",
-      "url": "https://www.mevalim.co.il/festivals/"
-    },
-    {
-      "title": "חוצות היוצר 2026 – ישי ריבו מארח את אמיר דדון",
-      "date": "2026-07-30",
-      "category": "מוזיקה",
-      "venue": "חוצות היוצר",
-      "city": "ירושלים",
-      "url": "https://www.mevalim.co.il/festivals/"
-    },
     {
       "title": "בגדול / טום וסלמן – תערוכת יחיד",
       "date": "2026-07-31",
@@ -32,6 +8,14 @@
       "venue": "מוזיאון תל אביב לאמנות",
       "city": "תל אביב",
       "url": "https://www.erev-rav.com/israel-art-map"
+    },
+    {
+      "title": "גלויות הקולאז' של דיוי בראל – הדרכה בתערוכה",
+      "date": "2026-08-01",
+      "category": "אמנות",
+      "venue": "מוזיאון העיר תל אביב-יפו",
+      "city": "תל אביב-יפו",
+      "url": "https://taycm.org.il/"
     },
     {
       "title": "כל הרוחות – מחול אנטי-מלחמתי בשש תמונות",
@@ -64,6 +48,22 @@
       "venue": "תיאטרון ירושלים",
       "city": "ירושלים",
       "url": "https://israel-festival.org/2026/performances-board"
+    },
+    {
+      "title": "שגיא דקל חן – מהשבי אל הדשא של ניר עוז: השירים והסיפורים",
+      "date": "2026-08-10",
+      "category": "מוזיקה",
+      "venue": "פסטיבל ישראל – נגב מערבי",
+      "city": "נגב מערבי",
+      "url": "https://israel-festival.org/2026/performances-board"
+    },
+    {
+      "title": "הרפתקאותיה של פריסילה מלכת המדבר – עיבוד בימתי",
+      "date": "2026-08-12",
+      "category": "תיאטרון",
+      "venue": "תיאטרון הבימה",
+      "city": "תל אביב-יפו",
+      "url": "https://kupatbravo.co.il/search/?hall=1717"
     }
   ]
 }
