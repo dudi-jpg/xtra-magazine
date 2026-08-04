@@ -1,30 +1,6 @@
 {
-  "updated": "2026-08-01",
+  "updated": "2026-08-04",
   "events": [
-    {
-      "title": "גלויות הקולאז' של דיוי בראל – הדרכה בתערוכה",
-      "date": "2026-08-01",
-      "category": "אמנות",
-      "venue": "מוזיאון העיר תל אביב-יפו",
-      "city": "תל אביב-יפו",
-      "url": "https://taycm.org.il/"
-    },
-    {
-      "title": "מסילת ישרים – תערוכה קבוצתית מקורית",
-      "date": "2026-08-01",
-      "category": "אמנות",
-      "venue": "מוזיאון תל אביב לאמנות",
-      "city": "תל אביב",
-      "url": "https://www.goodesign.co.il/tamuseum-4/"
-    },
-    {
-      "title": "מעגל הגיר הקווקזי – הצגה בתיאטרון הבימה",
-      "date": "2026-08-01",
-      "category": "תיאטרון",
-      "venue": "תיאטרון הבימה",
-      "city": "תל אביב",
-      "url": "https://www.ticketsi.co.il/%D7%94%D7%91%D7%99%D7%9E%D7%94-%D7%94%D7%A6%D7%92%D7%95%D7%AA"
-    },
     {
       "title": "כל הרוחות – מחול אנטי-מלחמתי בשש תמונות",
       "date": "2026-08-04",
@@ -50,6 +26,22 @@
       "url": "https://www.mevalim.co.il/festivals/"
     },
     {
+      "title": "תערוכת נומה בר – מאייר",
+      "date": "2026-08-04",
+      "category": "אמנות",
+      "venue": "מוזיאון תל אביב לאמנות (ביתן אייל עופר)",
+      "city": "תל אביב",
+      "url": "https://www.tamuseum.org.il/en/"
+    },
+    {
+      "title": "זינגר – הפקת תיאטרון הקאמרי",
+      "date": "2026-08-04",
+      "category": "תיאטרון",
+      "venue": "תיאטרון הקאמרי",
+      "city": "תל אביב",
+      "url": "https://www.cameri.co.il/%D7%9C%D7%95%D7%97-%D7%94%D7%95%D7%A4%D7%A2%D7%95%D7%AA/"
+    },
+    {
       "title": "SONIC BLUE – צלילת עומק לעולם היצירה של ריג'ויסר",
       "date": "2026-08-06",
       "category": "מוזיקה",
@@ -63,6 +55,14 @@
       "category": "מוזיקה",
       "venue": "פסטיבל ישראל – נגב מערבי",
       "city": "נגב מערבי",
+      "url": "https://israel-festival.org/2026/performances-board"
+    },
+    {
+      "title": "היפהופ תלפיות – כשהתזמורת משתלטת על הביט",
+      "date": "2026-08-13",
+      "category": "מוזיקה",
+      "venue": "פסטיבל ישראל – ירושלים",
+      "city": "ירושלים",
       "url": "https://israel-festival.org/2026/performances-board"
     }
   ]
