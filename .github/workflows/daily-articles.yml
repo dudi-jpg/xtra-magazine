@@ -1,12 +1,6 @@
 name: Daily articles
 
 on:
-  push:
-    # TEMP one-shot trigger: editing THIS file kicks a CI run so we can backfill
-    # articles immediately (repo's own ANTHROPIC_API_KEY secret is used). Remove
-    # this whole `push:` block right after the backfill run completes.
-    branches: [main]
-    paths: ['.github/workflows/daily-articles.yml']
   schedule:
     # 05:00 UTC daily ≈ 08:00 Israel (summer) / 07:00 (winter).
     # NOTE: there is deliberately NO wall-clock "gate" step. GitHub delays scheduled
