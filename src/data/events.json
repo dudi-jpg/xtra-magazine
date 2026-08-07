@@ -1,54 +1,6 @@
 {
-  "updated": "2026-08-04",
+  "updated": "2026-08-07",
   "events": [
-    {
-      "title": "כל הרוחות – מחול אנטי-מלחמתי בשש תמונות",
-      "date": "2026-08-04",
-      "category": "תיאטרון",
-      "venue": "תיאטרון ירושלים",
-      "city": "ירושלים",
-      "url": "https://israel-festival.org/2026/performances-board"
-    },
-    {
-      "title": "דרישת שלום 2026 – 11 כותבים, 12 מעצבים וקהל חושבים שלום",
-      "date": "2026-08-04",
-      "category": "ספרים",
-      "venue": "תיאטרון ירושלים",
-      "city": "ירושלים",
-      "url": "https://israel-festival.org/2026/performances-board"
-    },
-    {
-      "title": "חוצות היוצר 2026 – זהו זה X התקווה 6",
-      "date": "2026-08-04",
-      "category": "חיי לילה",
-      "venue": "חוצות היוצר",
-      "city": "ירושלים",
-      "url": "https://www.mevalim.co.il/festivals/"
-    },
-    {
-      "title": "תערוכת נומה בר – מאייר",
-      "date": "2026-08-04",
-      "category": "אמנות",
-      "venue": "מוזיאון תל אביב לאמנות (ביתן אייל עופר)",
-      "city": "תל אביב",
-      "url": "https://www.tamuseum.org.il/en/"
-    },
-    {
-      "title": "זינגר – הפקת תיאטרון הקאמרי",
-      "date": "2026-08-04",
-      "category": "תיאטרון",
-      "venue": "תיאטרון הקאמרי",
-      "city": "תל אביב",
-      "url": "https://www.cameri.co.il/%D7%9C%D7%95%D7%97-%D7%94%D7%95%D7%A4%D7%A2%D7%95%D7%AA/"
-    },
-    {
-      "title": "SONIC BLUE – צלילת עומק לעולם היצירה של ריג'ויסר",
-      "date": "2026-08-06",
-      "category": "מוזיקה",
-      "venue": "תיאטרון ירושלים",
-      "city": "ירושלים",
-      "url": "https://israel-festival.org/2026/performances-board"
-    },
     {
       "title": "שגיא דקל חן – מהשבי אל הדשא של ניר עוז: השירים והסיפורים",
       "date": "2026-08-10",
@@ -64,6 +16,54 @@
       "venue": "פסטיבל ישראל – ירושלים",
       "city": "ירושלים",
       "url": "https://israel-festival.org/2026/performances-board"
+    },
+    {
+      "title": "בת שבע – שדה 21 מאת אוהד נהרין",
+      "date": "2026-09-01",
+      "category": "תיאטרון",
+      "venue": "משכן אמנויות הבמה / סוזן דלל",
+      "city": "תל אביב",
+      "url": "https://batsheva.co.il/"
+    },
+    {
+      "title": "הקיבוצית – זיכרון דברים 2026 מאת רמי באר",
+      "date": "2026-09-01",
+      "category": "תיאטרון",
+      "venue": "בית העם רחובות – היכל התרבות העירוני",
+      "city": "רחובות",
+      "url": "https://user-1723486.cld.bz/rehovot-beithaam-2025-2026"
+    },
+    {
+      "title": "פסטיבל הסרטים הבינלאומי ה-42 חיפה",
+      "date": "2026-09-26",
+      "category": "קולנוע",
+      "venue": "סינמטק חיפה ואולמות הפסטיבל",
+      "city": "חיפה",
+      "url": "https://www.haifaff.co.il/"
+    },
+    {
+      "title": "Maskadelic – פסטיבל גואה טראנס",
+      "date": "2026-10-01",
+      "category": "חיי לילה",
+      "venue": "כפר שיטים",
+      "city": "שיטים, הנגב",
+      "url": "https://www.secrettelaviv.com/magazine/blog/toptens/%D7%A4%D7%A1%D7%98%D7%99%D7%91%D7%9C%D7%99-%D7%94%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%94%D7%9B%D7%99-%D7%98%D7%95%D7%91%D7%99%D7%9D-%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%A7%D7%99"
+    },
+    {
+      "title": "חזון העצמות החדשות: דימיונות וחזיוניות יהודיים",
+      "date": "2026-10-01",
+      "category": "אמנות",
+      "venue": "מוזיאון תל אביב לאמנות",
+      "city": "תל אביב",
+      "url": "https://www.tamuseum.org.il/"
+    },
+    {
+      "title": "מסילת ישרים: מסורת ומסירה באמנות הישראלית",
+      "date": "2026-10-01",
+      "category": "אמנות",
+      "venue": "מוזיאון תל אביב לאמנות",
+      "city": "תל אביב",
+      "url": "https://www.tamuseum.org.il/"
     }
   ]
 }
