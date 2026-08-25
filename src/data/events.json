@@ -1,14 +1,6 @@
 {
-  "updated": "2026-08-22",
+  "updated": "2026-08-25",
   "events": [
-    {
-      "title": "שלומית אהרון - כל הצלילים",
-      "date": "2026-08-22",
-      "category": "מוזיקה",
-      "venue": "היכל התרבות תל אביב, אולם צוקר",
-      "city": "תל אביב",
-      "url": "https://www.leaan.co.il/category/%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94"
-    },
     {
       "title": "פסטיבל שירה מטולה בירושלים 2026",
       "date": "2026-08-25",
@@ -64,6 +56,14 @@
       "venue": "היכל התרבות מרכז הבמה גני תקווה",
       "city": "גני תקווה",
       "url": "https://habama.smarticket.co.il/"
+    },
+    {
+      "title": "מרים קאהן – תערוכת יחיד",
+      "date": "2026-09-01",
+      "category": "אמנות",
+      "venue": "מוזיאון תל אביב לאמנות",
+      "city": "תל אביב",
+      "url": "https://www.tamuseum.org.il/en/exhibitions-and-events/"
     }
   ]
 }
