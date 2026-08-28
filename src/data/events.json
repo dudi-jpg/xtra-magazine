@@ -1,37 +1,13 @@
 {
-  "updated": "2026-08-25",
+  "updated": "2026-08-28",
   "events": [
     {
-      "title": "פסטיבל שירה מטולה בירושלים 2026",
-      "date": "2026-08-25",
-      "category": "ספרים",
-      "venue": "בית הקונפדרציה ומשכנות שאננים",
-      "city": "ירושלים",
-      "url": "https://www.confederationhouse.org/page_20971"
-    },
-    {
-      "title": "ליאת בנאי",
-      "date": "2026-08-25",
-      "category": "מוזיקה",
-      "venue": "רידינג 3",
+      "title": "מסיבת DECISION GAGARIN TEL AVIV",
+      "date": "2026-08-28",
+      "category": "חיי לילה",
+      "venue": "גגרין",
       "city": "תל אביב",
-      "url": "https://www.leaan.co.il/category/%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94"
-    },
-    {
-      "title": "קונצרט פתיחת פסטיבל ישראל – הקרנת \"איש על חבל\"",
-      "date": "2026-08-26",
-      "category": "קולנוע",
-      "venue": "סינמטק ירושלים",
-      "city": "ירושלים",
-      "url": "https://jer-cin.org.il/he"
-    },
-    {
-      "title": "The Canaanite Blues - אהוד בנאי במדבר",
-      "date": "2026-08-27",
-      "category": "מוזיקה",
-      "venue": "כפר הנוקדים",
-      "city": "הנגב",
-      "url": "https://www.secrettelaviv.com/magazine/blog/toptens/%D7%A4%D7%A1%D7%98%D7%99%D7%91%D7%9C%D7%99-%D7%94%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%94%D7%9B%D7%99-%D7%98%D7%95%D7%91%D7%99%D7%9D-%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%A7%D7%99"
+      "url": "https://www.eventer.co.il/"
     },
     {
       "title": "בת שבע – שדה 21 מאת אוהד נהרין",
@@ -64,6 +40,30 @@
       "venue": "מוזיאון תל אביב לאמנות",
       "city": "תל אביב",
       "url": "https://www.tamuseum.org.il/en/exhibitions-and-events/"
+    },
+    {
+      "title": "המחול \"החור\" מאת אוהד נהרין - להקת מחול בת שבע",
+      "date": "2026-09-02",
+      "category": "תיאטרון",
+      "venue": "מרכז סוזן דלל",
+      "city": "תל אביב",
+      "url": "https://batsheva.co.il/en/schedule/"
+    },
+    {
+      "title": "Atmos Rosh Hashanah ☼ Liquid Soul in Israel",
+      "date": "2026-09-12",
+      "category": "חיי לילה",
+      "venue": "עמק יזרעאל",
+      "city": "עמק יזרעאל",
+      "url": "https://www.eventer.co.il/"
+    },
+    {
+      "title": "פסטיבל הסרטים הבינלאומי ה-42 חיפה",
+      "date": "2026-09-26",
+      "category": "קולנוע",
+      "venue": "סינמטק חיפה ומרכז הכרמל",
+      "city": "חיפה",
+      "url": "https://www.haifaff.co.il/"
     }
   ]
 }
