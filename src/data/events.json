@@ -1,14 +1,6 @@
 {
-  "updated": "2026-08-28",
+  "updated": "2026-08-31",
   "events": [
-    {
-      "title": "מסיבת DECISION GAGARIN TEL AVIV",
-      "date": "2026-08-28",
-      "category": "חיי לילה",
-      "venue": "גגרין",
-      "city": "תל אביב",
-      "url": "https://www.eventer.co.il/"
-    },
     {
       "title": "בת שבע – שדה 21 מאת אוהד נהרין",
       "date": "2026-09-01",
@@ -42,6 +34,22 @@
       "url": "https://www.tamuseum.org.il/en/exhibitions-and-events/"
     },
     {
+      "title": "תערוכת 120 שנה לבצלאל במוזיאון תל אביב",
+      "date": "2026-09-01",
+      "category": "אמנות",
+      "venue": "מוזיאון תל אביב לאמנות",
+      "city": "תל אביב",
+      "url": "https://www.prtfl.co.il/archives/243816"
+    },
+    {
+      "title": "המחזמר 'עפרה' – סיפור חייה של עופרה חזה",
+      "date": "2026-09-01",
+      "category": "תיאטרון",
+      "venue": "מופע נודד",
+      "city": "תל אביב",
+      "url": "https://www.ticketsi.co.il/%D7%94%D7%99%D7%9B%D7%9C-%D7%94%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91"
+    },
+    {
       "title": "המחול \"החור\" מאת אוהד נהרין - להקת מחול בת שבע",
       "date": "2026-09-02",
       "category": "תיאטרון",
@@ -50,20 +58,12 @@
       "url": "https://batsheva.co.il/en/schedule/"
     },
     {
-      "title": "Atmos Rosh Hashanah ☼ Liquid Soul in Israel",
-      "date": "2026-09-12",
-      "category": "חיי לילה",
-      "venue": "עמק יזרעאל",
-      "city": "עמק יזרעאל",
-      "url": "https://www.eventer.co.il/"
-    },
-    {
-      "title": "פסטיבל הסרטים הבינלאומי ה-42 חיפה",
-      "date": "2026-09-26",
-      "category": "קולנוע",
-      "venue": "סינמטק חיפה ומרכז הכרמל",
-      "city": "חיפה",
-      "url": "https://www.haifaff.co.il/"
+      "title": "אבישי כהן – סיבוב לרגל צאת האלבום 'Eternal Child'",
+      "date": "2026-09-03",
+      "category": "מוזיקה",
+      "venue": "זאפה ירושלים",
+      "city": "ירושלים",
+      "url": "https://www.eventim.co.il/events/%D7%94%D7%95%D7%A4%D7%A2%D7%95%D7%AA-%D7%97%D7%99%D7%95%D7%AA-51/"
     }
   ]
 }
