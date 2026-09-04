@@ -1,69 +1,69 @@
 {
-  "updated": "2026-09-01",
+  "updated": "2026-09-04",
   "events": [
     {
-      "title": "בת שבע – שדה 21 מאת אוהד נהרין",
-      "date": "2026-09-01",
-      "category": "תיאטרון",
-      "venue": "משכן אמנויות הבמה / סוזן דלל",
-      "city": "תל אביב",
-      "url": "https://batsheva.co.il/"
-    },
-    {
-      "title": "הקיבוצית – זיכרון דברים 2026 מאת רמי באר",
-      "date": "2026-09-01",
-      "category": "תיאטרון",
-      "venue": "בית העם רחובות – היכל התרבות העירוני",
-      "city": "רחובות",
-      "url": "https://user-1723486.cld.bz/rehovot-beithaam-2025-2026"
-    },
-    {
-      "title": "אוי אלוהים | תיאטרון הבימה",
-      "date": "2026-09-01",
-      "category": "תיאטרון",
-      "venue": "היכל התרבות מרכז הבמה גני תקווה",
-      "city": "גני תקווה",
-      "url": "https://habama.smarticket.co.il/"
-    },
-    {
-      "title": "מרים קאהן – תערוכת יחיד",
-      "date": "2026-09-01",
+      "title": "חזון העצמות החדשות - תערוכה קבוצתית",
+      "date": "2026-09-04",
       "category": "אמנות",
       "venue": "מוזיאון תל אביב לאמנות",
       "city": "תל אביב",
-      "url": "https://www.tamuseum.org.il/en/exhibitions-and-events/"
+      "url": "https://www.tamuseum.org.il/en/"
     },
     {
-      "title": "תערוכת 120 שנה לבצלאל במוזיאון תל אביב",
-      "date": "2026-09-01",
+      "title": "בגדול / טום וסלמן - תערוכה",
+      "date": "2026-09-04",
       "category": "אמנות",
       "venue": "מוזיאון תל אביב לאמנות",
       "city": "תל אביב",
-      "url": "https://www.prtfl.co.il/archives/243816"
+      "url": "https://www.tamuseum.org.il/en/"
     },
     {
-      "title": "המחזמר 'עפרה' – סיפור חייה של עופרה חזה",
-      "date": "2026-09-01",
-      "category": "תיאטרון",
-      "venue": "מופע נודד",
+      "title": "תערוכת נבט יצחק - צילום",
+      "date": "2026-09-04",
+      "category": "אמנות",
+      "venue": "גלריה ברוורמן",
       "city": "תל אביב",
-      "url": "https://www.ticketsi.co.il/%D7%94%D7%99%D7%9B%D7%9C-%D7%94%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91"
+      "url": "https://www.erev-rav.com/israel-art-map"
     },
     {
-      "title": "המחול \"החור\" מאת אוהד נהרין - להקת מחול בת שבע",
-      "date": "2026-09-02",
-      "category": "תיאטרון",
-      "venue": "מרכז סוזן דלל",
-      "city": "תל אביב",
-      "url": "https://batsheva.co.il/en/schedule/"
-    },
-    {
-      "title": "אבישי כהן – סיבוב לרגל צאת האלבום 'Eternal Child'",
-      "date": "2026-09-03",
+      "title": "נפגשים על הדשא - מופע מחווה לאריק איינשטיין, שלום חנוך ומאיר אריאל",
+      "date": "2026-09-16",
       "category": "מוזיקה",
-      "venue": "זאפה ירושלים",
-      "city": "ירושלים",
-      "url": "https://www.eventim.co.il/events/%D7%94%D7%95%D7%A4%D7%A2%D7%95%D7%AA-%D7%97%D7%99%D7%95%D7%AA-51/"
+      "venue": "זאפה חיפה",
+      "city": "חיפה",
+      "url": "https://www.zappa-club.co.il/events/הופעות-חיות-51/"
+    },
+    {
+      "title": "להקת המחול קמע - מופע מחול עכשווי",
+      "date": "2026-10-23",
+      "category": "תיאטרון",
+      "venue": "סטודיו זהבה, מרכז סוזן דלל",
+      "city": "תל אביב",
+      "url": "https://www.kameadance.com/he/לוח-זמנים/"
+    },
+    {
+      "title": "מכל היוצרים - הופעה חיה בזאפה הרצליה",
+      "date": "2026-10-24",
+      "category": "מוזיקה",
+      "venue": "זאפה הרצליה",
+      "city": "הרצליה",
+      "url": "https://www.zappa-club.co.il/events/הופעות-חיות-51/"
+    },
+    {
+      "title": "להקת המחול קמע - מרכז הבמה",
+      "date": "2026-11-05",
+      "category": "תיאטרון",
+      "venue": "מרכז הבמה",
+      "city": "גני תקווה",
+      "url": "https://www.kameadance.com/he/לוח-זמנים/"
+    },
+    {
+      "title": "להקת המחול קמע - אודיטוריום אריסון",
+      "date": "2026-11-19",
+      "category": "תיאטרון",
+      "venue": "אודיטוריום אריסון",
+      "city": "תל אביב",
+      "url": "https://www.kameadance.com/he/לוח-זמנים/"
     }
   ]
 }
