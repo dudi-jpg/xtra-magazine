@@ -1,21 +1,13 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-09-28",
   "events": [
     {
-      "title": "פסטיבל הסרטים הבינלאומי ה-42 חיפה",
-      "date": "2026-09-26",
+      "title": "פסטיבל הסרטים הבינלאומי ה-42 בחיפה",
+      "date": "2026-09-28",
       "category": "קולנוע",
-      "venue": "מרכז הכרמל וסינמטק חיפה",
+      "venue": "סינמטק חיפה ומתחמי הפסטיבל",
       "city": "חיפה",
-      "url": "https://www.haifaff.co.il/"
-    },
-    {
-      "title": "פסטיבל אסיטז' הבינלאומי לתיאטרון ילדים ונוער",
-      "date": "2026-09-27",
-      "category": "תיאטרון",
-      "venue": "היכל התרבות נתניה",
-      "city": "נתניה",
-      "url": "https://www.eventim.co.il/artist/%D7%A4%D7%A1%D7%98%D7%99%D7%91%D7%9C%D7%90%D7%A1%D7%99%D7%98%D7%96/"
+      "url": "https://www.haifaff.co.il"
     },
     {
       "title": "הצגת 'גִּ'ינְגִּ'י' - תיאטרון השעה הישראלי",
@@ -50,20 +42,28 @@
       "url": "https://batsheva.smarticket.co.il/"
     },
     {
-      "title": "ניו בורן X מרסדס בנד",
-      "date": "2026-10-29",
-      "category": "מוזיקה",
-      "venue": "אמפי מסובים",
-      "city": "מסובים",
-      "url": "https://www.eventim.co.il/"
+      "title": "אסטריקס × דקל | SUKKOT",
+      "date": "2026-10-01",
+      "category": "חיי לילה",
+      "venue": "רידינג 3, נמל תל אביב",
+      "city": "תל אביב-יפו",
+      "url": "https://airdrop.co.il/astrix"
     },
     {
-      "title": "הריטריט - קומדיה חדשה מאת בת חן סבג",
-      "date": "2026-11-01",
+      "title": "OMRI SMADAR - SUKKOT",
+      "date": "2026-10-01",
+      "category": "חיי לילה",
+      "venue": "חורש האלונים",
+      "city": "רמת ישי",
+      "url": "https://www.eventer.co.il/"
+    },
+    {
+      "title": "משהו טוב - דרמה קומית",
+      "date": "2026-10-01",
       "category": "תיאטרון",
-      "venue": "התיאטרון הקאמרי",
-      "city": "תל אביב",
-      "url": "https://www.cameri.co.il/%D7%94%D7%A6%D7%92%D7%95%D7%AA_%D7%94%D7%A7%D7%90%D7%9E%D7%A8%D7%99/"
+      "venue": "תיאטרון הבימה",
+      "city": "תל אביב-יפו",
+      "url": "https://kupatbravo.co.il/search/?hall=1717"
     }
   ]
 }
