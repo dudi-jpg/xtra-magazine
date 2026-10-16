@@ -1,14 +1,6 @@
 {
-  "updated": "2026-10-13",
+  "updated": "2026-10-16",
   "events": [
-    {
-      "title": "COLORFUL FESTIVAL – מסיבה במועדון גגרין",
-      "date": "2026-10-15",
-      "category": "חיי לילה",
-      "venue": "מועדון גגרין",
-      "city": "תל אביב",
-      "url": "https://airdrop.co.il/"
-    },
     {
       "title": "סינדרלה – בלט על הקרח",
       "date": "2026-10-20",
@@ -34,6 +26,22 @@
       "url": "https://www.tamuseum.org.il/en/"
     },
     {
+      "title": "פסטיבל הקולנוע הגאה תל אביב 2026",
+      "date": "2026-10-22",
+      "category": "קולנוע",
+      "venue": "סינמטק תל אביב",
+      "city": "תל אביב-יפו",
+      "url": "https://festivalim.co.il/%D7%94%D7%A4%D7%A1%D7%98%D7%99%D7%91%D7%9C-%D7%94%D7%91%D7%99%D7%A0%D7%9C%D7%90%D7%95%D7%9E%D7%99-%D7%9C%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%92%D7%90%D7%94-2026"
+    },
+    {
+      "title": "ALTERNATIVA! Rock & Metal Party",
+      "date": "2026-10-22",
+      "category": "חיי לילה",
+      "venue": "מועדון הגגרין – אולם נובה",
+      "city": "תל אביב-יפו",
+      "url": "https://eventbuzz.co.il/events"
+    },
+    {
       "title": "קזבלן – המחזמר של תיאטרון הבימה",
       "date": "2026-10-25",
       "category": "תיאטרון",
@@ -50,20 +58,12 @@
       "url": "https://www.tamuseum.org.il/en/visit/"
     },
     {
-      "title": "איש הגשם – תיאטרון הקאמרי",
-      "date": "2026-10-28",
-      "category": "תיאטרון",
-      "venue": "תיאטרון הקאמרי",
-      "city": "תל אביב",
-      "url": "https://www.ticketsi.co.il/%D7%9C%D7%95%D7%97-%D7%94%D7%95%D7%A4%D7%A2%D7%95%D7%AA/"
-    },
-    {
-      "title": "פסטיבל תל־אביב 2026 – שבוע של מוזיקה ואמנות",
-      "date": "2026-11-01",
-      "category": "מוזיקה",
-      "venue": "מוזיאון תל־אביב לאמנות ומשכן לאמנויות הבמה",
+      "title": "אלכס לבק: קופסה שחורה – ביתן אייל עופר (פתיחת תערוכות העונה)",
+      "date": "2026-10-27",
+      "category": "אמנות",
+      "venue": "מוזיאון תל אביב לאמנות, ביתן אייל עופר",
       "city": "תל אביב-יפו",
-      "url": "https://telavivfestival.co.il/"
+      "url": "https://www.tamuseum.org.il/en/visit/"
     }
   ]
 }
